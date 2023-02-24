@@ -6,20 +6,20 @@
 4. Funciones de alto orden
 4. Evaluación perezosa
 6. Efectos colaterales
-7. Programación imperativa y la programación funcional. 
-8. Entrada y salida en la programación funcional
-9 . Concurrencia en la programación funcional
+7. Listas y demostraciones
+8. Entrada y salida de un mundo imperativo en un mundo declarativo
+9. Cierre
 
 ---
 
 # 1. Definición forma de la programación funcional
 
-> "La programación funcional es el acto de escribir programas con funciones 
+> "La programación funcional es el acto de escribir programas con funciones
 >  puras" (Turtle Z. 2020)
 
 
 > "La programación funcional (PF) está basada en un simple premisa: construimos
->  programas que no tiene efectos colaterales" 
+>  programas que no tiene efectos colaterales"
 >  (Chiusano P., Bjarnason, Rúnar. 2015)
 
 ---
@@ -38,7 +38,7 @@ Las funciones puras tienes tres propiedades (Turtle, Z. 2020):
 
 ¿Qué es la transparencia referencial?
 
-> "Una función debe ser reemplazable por los valores que esta 
+> "Una función debe ser reemplazable por los valores que esta
 > recibe e insertando el resultado generado" (Hunt, J. 2014)
 
 ---
@@ -60,13 +60,20 @@ Las funciones puras tienes tres propiedades (Turtle, Z. 2020):
 
 ---
 
+# 4. Funciones de alto orden (Listas)
+
+* Listas: `[a]`, `[]`, `:`
+* `foldr :: (a -> b -> b) -> b -> [a] -> b`
+* `foldl :: (b -> a -> b) -> b -> [a] -> b`
+* `foldr :: (Foldable t) => (a -> b -> b) -> b -> t a -> b`
+* `foldl :: (Foldable t) => (b -> a -> b) -> b -> t a -> b`
+* `map :: (a -> b) -> [a] -> [b]`
+
+---
+
 # 5. Evaluación perezosa
 
-**Problema repmin**
-
-> "La función clásica de *repmin* propuesta por Ricard S. Bird, donde ésta toma un árbol como argumento, y
-> retorna un árbol de forma similar, en la cual los valores son reemplazados
-> por el valor mínimo de las hojas del árbol original." (Viera, M. Swierstra, S.D., 2009)
+* La una expresión solo es evaluada cuando se requiere.
 
 ---
 
@@ -81,30 +88,76 @@ Las funciones puras tienes tres propiedades (Turtle, Z. 2020):
 
 # 7. Programación imperativa y la programación funcional
 
-* La programación funcional evita los efectos coláterales.
-* La programación imperativa puede vivir con los efectos coláterales.
+* La programación funcional (pura) evita los efectos colaterales.
+* La programación imperativa hace uso de los efectos colaterales.
 * ¿Qué hacer?
-<!-- Buscar referencia -->
-  - Buscar diferentes modos de entrada y salida
-    * Transferencia de estados.
-    * Flujos
-    * Mónadas
----
-
-# 8. Entrada y salida en programación funcional
-
-<!-- Por escribir -->
-* Monada: `IO a`
+  - Estado de IO en programación funcional (Hudak, P. 1989)
+    * Flujos (Streams)
+    * Continuaciones
+    * Sistemas (Systems)
+  - Solución
+    * Mónadas (Moggi, E, 1989)
 
 ---
 
-# 9. Concurrencia en programación funcional
+# 8. Entrada y salida de un mundo imperativo en un mundo declarativo (Definición)
 
-<!-- Por escribir -->
+* Mónadas:
+  - Contenedor: `return :: a -> IO a`
+  - Computación: 
+      * bind: `(>>=) :: IO a -> (a -> IO b) -> IO b`
+    * then: `(>>)  :: IO a -> IO b -> IO b`
+
+---
+
+# 8. Entrada y salida de un mundo imperativo en un mundo declarativo (Otra definición de Mondor)
+
+* Mónada. (Peyton Jones, S. 2010)
+
+```haskell
+type IO a = Word -> (a, World)
+```
+
+* funciones:
+
+```haskell
+getChar :: IO Char
+putChar :: Char -> IO ()
+```
+
+---
+
+# 8. Entrada y salida de un mundo imperativo en un mundo declarativo (Otras mónadas)
+
+* `Identity`
+* `Maybe`
+* `Error`
+* `List`
+* `IO`
+* `State`
+* `Reader` 
+* `Writer`
+* `Continuation`
+
+---
+
+# 9. Cierre
+
+* Es posible hacer programación imperativa a través de **mónadas**
+* Estrategia: dividir los dos mundos
+* Permite tener una mayor versátilidad del operador (`;`):
+  + Bind: `(>>=)`
+  + Then: `>>`
+
+---
 
 # Bibliografía
 
 * Bird, R. Using circular programs to eliminate multiple traversals of data. Act Info. 1984.
+* Bird, R. Introducción a la programación funcional. Prentice-Hall. 2000.
 * Chiusano, P., Bjarnason, R. Functional Programming in Scala. Manning Publications. 2015.
+* Hudak, P. On the Expressivenss of Purely Functional I/O Systems. 1989.
+* Moggi, E. Computational lambda calculus and monads. 1989.
+* Peyton Jones, S. Tackling the Awkward Squad: monadic input/ouput, concurrency, exceptions, and foreing-languages calls in Haskell. 2010.
 * Turtle, Z. Functional Programming for Mortals with Cats. Lean Publishing. 2020.
 * Viera, M. Swierstra, S.D. Attribute Grammars Fly First-Class How to do Aspect Oriented Programming in Haskell. 2009
