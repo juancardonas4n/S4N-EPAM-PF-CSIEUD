@@ -104,7 +104,7 @@ Las funciones puras tienes tres propiedades (Turtle, Z. 2020):
 
 * Mónadas:
   - Contenedor: `return :: a -> IO a`
-  - Computación: 
+  - Computación:
       * bind: `(>>=) :: IO a -> (a -> IO b) -> IO b`
     * then: `(>>)  :: IO a -> IO b -> IO b`
 
@@ -135,7 +135,7 @@ putChar :: Char -> IO ()
 * `List`
 * `IO`
 * `State`
-* `Reader` 
+* `Reader`
 * `Writer`
 * `Continuation`
 
