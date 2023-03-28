@@ -1,4 +1,4 @@
-package com.epam.rd.coffemarker.s5;
+package com.epam.rd.coffemarker.s6;
 
 import static com.epam.rd.coffemarker.s5.common.List.fill;
 import com.epam.rd.coffemarker.s5.common.Tuple;
@@ -15,6 +15,7 @@ public class CoffeeMarker {
     public static Tuple<List<Coffee>, Payment>
         buyCoffees(final int quantity,
                    final CreditCard cCard) {
-        return null;
+        return new Tuple<>(fill(quantity, () -> new Coffee()),
+                           new Payment(cCard, Coffee.price * quantity));
     }
 }

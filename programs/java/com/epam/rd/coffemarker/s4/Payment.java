@@ -11,11 +11,6 @@ public class Payment {
     }
 
     public Payment combine(Payment payment) {
-        if (creditCard.equals(payment.creditCard)) {
-            return new Payment(creditCard, amount + payment.amount);
-        }
-        else {
-            throw new IllegalStateException("Cards don't match");
-        }
+        return null;
     }
 }

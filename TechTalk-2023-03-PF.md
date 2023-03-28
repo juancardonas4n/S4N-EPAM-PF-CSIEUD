@@ -9,7 +9,7 @@
 1. ¿Qué es la programación funcional?
 2. Funciones puras
 3. Valores inmutables
-4. Aplicar principios funcionales a un ejemplo
+4. Aplicar principios funcionales a un programa no funcional
 5. Cierre
 
 ---
@@ -34,8 +34,8 @@
 
 # 1. ¿Qué es la programación funcional? - Conjunto de técnicas
 
-+ Funciones de primera clase
 + Funciones anónimas
++ Funciones de alto orden
 + Clausuras
 + Currificación
 + Evaluación perezosa
@@ -106,7 +106,9 @@ Las funciones puras tienes tres propiedades (Turtle, Z. 2020):
 
 # 3. Tipos de datos inmutables
 
-
+* Solo pueden ser construidos
+* No puede ser actualizados
+* "Actualizaciones" a través de la creación de nuevos
 
 ---
 
@@ -114,7 +116,6 @@ Las funciones puras tienes tres propiedades (Turtle, Z. 2020):
 
 * Operaciones de suma
 * Operaciones de producto
-* Clases
 * Una combinación de ambos
 
 ---
@@ -131,13 +132,13 @@ public class CoffeeMarker {
     }
 }
 ```
-+ Tiene efectos colaterales
++ ¿Por qué?
 
 ---
 
 # 4. Aplicar principios funcionales a un programa no funcional (2)
 
-+ Separar el pago (`Payment`)
++ Separar el pago del producto
 ```java
 public class Payment {
   // ...
@@ -190,7 +191,78 @@ public class CoffeeMarker {
 
 # 4. Aplicar principios funcionales a un programa no funcional (5)
 
++ El tipo `List`
++ El tipo `Supplier<A>`
 
+---
+
+# 4. Aplicar principios funcionales a un programa no funcional (5)
+
+```java
+@Test
+public void testByCoffees() {
+   CreditCard creditCard = new CreditCard();
+   Tuple<List<Coffee>, Payment> purchase = CoffeeMarker.buyCoffees(5,
+                                                                   creditCard);
+   assertEquals(Coffee.price * 5, purchase._2.amount);
+   assertEquals(creditCard, purchase._2.creditCard);
+}
+```
+
+---
+
+# 4. Aplicar principios funcionales a un programa no funcional (6)
+
++ Función `groupBy`
+```java
+public <B> Map<B, List<A>> groupBy(Function<A, B> f)
+```
+
+---
+
+# 4. Aplicar principios funcionales a un programa no funcional (6)
+
++ Función `values` del tipo `Map`
+```java
+public List<A> values()
+```
+
+---
+
+# 4. Aplicar principios funcionales a un programa no funcional (6)
+
++ Función de transformación (`map`) en el tipo `List`
+```
+public <B> List<B> map(Function<A, B> f)
+```
+
+---
+
+# 4. Aplicar principios funcionales a un programa no funcional (6)
+
++ Función de separación de tuplas:
+```
+Tuple<List<A1>, List<A2>> unzip(Function<A, Tuple<A1, A2>> f)
+```
++ Función de redución
+```
+A reduce(Function<A, Function<A,A>> f)
+```
+
+---
+
+# 4. Aplicar principios funcionales a un programa no funcional (6)
+
++ Función de redución
+```
+A reduce(Function<A, Function<A,A>> f)
+```
+
+---
+
+# 4. Aplicar principios funcionales a un programa no funcional (6)
+
++ Implementación de `groupByCard`
 
 ---
 
@@ -213,19 +285,11 @@ public class CoffeeMarker {
 
 # Bibliografía
 
-* Bird, R. Using circular programs to eliminate multiple traversals
-          of data. Act Info. 1984.
 * Bird, R. Introducción a la programación funcional. Prentice-Hall.
          2000.
 * Chiusano, P., Bjarnason, R. Functional Programming in Scala.
          Manning Publications. 2015.
 * Cukic. Ivan. Functional Programming in C++. How to improve your C++
          programs using functional techniques. Manning Publications. 2019.
-* Hudak, P. On the Expressivenss of Purely Functional I/O Systems. 1989.
-* Moggi, E. Computational lambda calculus and monads. 1989.
-* Peyton Jones, S. Tackling the Awkward Squad: monadic input/ouput,
-         concurrency, exceptions, and foreing-languages calls in Haskell. 2010.
 * Saumont, P-Y., Functional Programming in Java. Manning Publications. 2017.
 * Turtle, Z. Functional Programming for Mortals with Cats. Lean Publishing. 2020.
-* Viera, M. Swierstra, S.D. Attribute Grammars Fly First-Class How to do Aspect
-         Oriented Programming in Haskell. 2009

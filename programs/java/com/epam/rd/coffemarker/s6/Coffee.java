@@ -1,4 +1,4 @@
-package com.epam.rd.coffemarker.s4;
+package com.epam.rd.coffemarker.s6;
 
 public class Coffee {
 
