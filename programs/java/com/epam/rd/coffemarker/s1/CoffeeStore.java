@@ -1,6 +1,6 @@
 package com.epam.rd.coffemarker.s1;
 
-public class CoffeeMarker {
+public class CoffeeStore {
 
     public static Coffee buyCoffee(CreditCard creditCard) {
         Coffee coffee = new Coffee();

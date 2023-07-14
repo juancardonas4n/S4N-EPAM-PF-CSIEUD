@@ -188,7 +188,7 @@ public Payment combine(Payment payment) {
 ```java
 public class CoffeeStore {
   // ...
-  public static Tuple<List<Coffee>, Payment> buyCoffee(...) {
+  public static Tuple<List<Coffee>, Payment> buyCoffees(...) {
   // ...
   }
 }
@@ -209,60 +209,6 @@ public void testByCoffees() {
 }
 ```
 
----
-
-# 4. Aplicar principios funcionales a un programa no funcional (v0.9)
-
-+ Función `groupBy`
-```java
-public <B> Map<B, List<A>> groupBy(Function<A, B> f)
-```
-
----
-
-# 4. Aplicar principios funcionales a un programa no funcional (v0.9)
-
-+ Función `values` del tipo `Map`
-```java
-public List<A> values()
-```
-
----
-
-# 4. Aplicar principios funcionales a un programa no funcional (v0.9)
-
-+ Función de transformación (`map`) en el tipo `List`
-```
-public <B> List<B> map(Function<A, B> f)
-```
-
----
-
-# 4. Aplicar principios funcionales a un programa no funcional (v0.9)
-
-+ Función de separación de tuplas:
-```
-Tuple<List<A1>, List<A2>> unzip(Function<A, Tuple<A1, A2>> f)
-```
-+ Función de redución
-```
-A reduce(Function<A, Function<A,A>> f)
-```
-
----
-
-# 4. Aplicar principios funcionales a un programa no funcional (v0.9)
-
-+ Función de redución
-```
-A reduce(Function<A, Function<A,A>> f)
-```
-
----
-
-# 4. Aplicar principios funcionales a un programa no funcional (v0.9)
-
-+ Implementación de `groupByCard`
 
 ---
 

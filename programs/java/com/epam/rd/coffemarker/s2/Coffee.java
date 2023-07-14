@@ -1,8 +1,5 @@
 package com.epam.rd.coffemarker.s2;
 
 public class Coffee {
-
-    public int getAmount() {
-        return 3;
-    }
+    public final int price = 42;
 }
